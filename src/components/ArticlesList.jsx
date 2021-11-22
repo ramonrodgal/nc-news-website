@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import NavBar from './NavBar';
+import ArticleCard from './ArticleCard';
 import { getArticles } from '../utils/api';
 import { useParams } from 'react-router-dom';
 
@@ -26,7 +27,7 @@ export default function ArticlesList() {
       <NavBar />
       <div>
         {articles.map((article) => {
-          return <p key={article.title}>{article.title}</p>;
+          return <ArticleCard article={{ ...article }} />;
         })}
       </div>
     </main>
