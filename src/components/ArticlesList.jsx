@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import ArticleCard from './ArticleCard';
 import { getArticles } from '../utils/api';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 export default function ArticlesList() {
   const [articles, setArticles] = useState([]);
@@ -27,7 +27,11 @@ export default function ArticlesList() {
       <NavBar />
       <div>
         {articles.map((article) => {
-          return <ArticleCard article={{ ...article }} />;
+          return (
+            <Link to={`/articles/${article.topic}/${article.article_id}`}>
+              <ArticleCard key={article.article_id} article={{ ...article }} />
+            </Link>
+          );
         })}
       </div>
     </main>
