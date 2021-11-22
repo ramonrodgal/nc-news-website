@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 //API functions
 import { getTopics } from '../utils/api';
+import { useNavigate } from 'react-router';
 
-export default function NavBar({ setTopic }) {
+export default function NavBar() {
   const [topics, setTopics] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  let navigate = useNavigate();
 
   useEffect(() => {
     getTopics().then((topics) => {
@@ -22,7 +24,7 @@ export default function NavBar({ setTopic }) {
       <select
         name="topics"
         onChange={(e) => {
-          setTopic(e.target.value);
+          navigate(`/articles/${e.target.value}`);
         }}
       >
         <option disabled selected>

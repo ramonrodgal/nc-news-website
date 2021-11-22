@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import { getArticles } from '../utils/api';
+import { useParams } from 'react-router-dom';
 
 export default function ArticlesList() {
-  const [topic, setTopic] = useState(undefined);
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsloading] = useState(true);
+  const { topic } = useParams();
+
+  console.log(topic);
 
   useEffect(() => {
     getArticles(topic).then((articles) => {
@@ -20,7 +23,7 @@ export default function ArticlesList() {
 
   return (
     <main>
-      <NavBar setTopic={setTopic} />
+      <NavBar />
       <div>
         {articles.map((article) => {
           return <p key={article.title}>{article.title}</p>;
