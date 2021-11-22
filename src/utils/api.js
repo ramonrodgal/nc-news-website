@@ -1,11 +1,17 @@
 import axios from 'axios';
 
-const marketplaceApi = axios.create({
+const ncNewsApi = axios.create({
   baseURL: 'https://be-nc-news-api.herokuapp.com/api/',
 });
 
 export const getTopics = () => {
-  return marketplaceApi.get('/topics').then((res) => {
+  return ncNewsApi.get('/topics').then((res) => {
     return res.data.topics;
+  });
+};
+
+export const getArticles = () => {
+  return ncNewsApi.get('/articles').then((res) => {
+    return res.data.articles;
   });
 };
