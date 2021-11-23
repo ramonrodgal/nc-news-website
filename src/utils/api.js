@@ -29,8 +29,13 @@ export const getArticleById = (article_id) => {
 };
 
 export const getComments = (article_id) => {
-  console.log(article_id);
   return ncNewsApi.get(`articles/${article_id}/comments`).then((res) => {
     return res.data.comments;
+  });
+};
+
+export const getUserByUsername = (username) => {
+  return ncNewsApi.get(`users/${username}`).then((res) => {
+    return res.data.user;
   });
 };
