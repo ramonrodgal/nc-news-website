@@ -3,14 +3,15 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext.jsx';
 
 import { getUserByUsername } from '../utils/api';
 
 export default function LogIn() {
-  const { setUser, isLoggedIn } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,13 +20,14 @@ export default function LogIn() {
     getUserByUsername(username)
       .then((user) => {
         setUser(user);
+        navigate('/');
       })
       .catch((err) => {
         console.log(err.msg);
       });
   };
 
-  return !isLoggedIn ? (
+  return (
     <main>
       <Typography variant="h2">Log In</Typography>
       <form onSubmit={handleSubmit}>
@@ -36,13 +38,6 @@ export default function LogIn() {
           </Button>
         </FormControl>
       </form>
-    </main>
-  ) : (
-    <main>
-      <h2>You are logged in!</h2>
-      <Link to="/">
-        <Button>Go to home page</Button>
-      </Link>
     </main>
   );
 }
