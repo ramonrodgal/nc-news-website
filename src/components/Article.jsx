@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getArticleById } from '../utils/api';
+import Comments from '../components/Comments';
 
 export default function Article() {
   const [article, setArticle] = useState({});
@@ -10,7 +11,7 @@ export default function Article() {
     getArticleById(article_id).then((article) => {
       setArticle(article);
     });
-  }, []);
+  }, [article_id]);
 
   return (
     <main>
@@ -21,6 +22,7 @@ export default function Article() {
       </p>
       <p>{article.body}</p>
       <p>Votes:{article.votes}</p>
+      <Comments article_id={article_id} />
     </main>
   );
 }
