@@ -22,7 +22,7 @@ export default function Article() {
       </p>
       <p>{article.body}</p>
       <p>Votes:{article.votes}</p>
-      <Comments article_id={article_id} />
+      <Comments article_id={article_id} articleAuthor={article.author} />
     </main>
   );
 }

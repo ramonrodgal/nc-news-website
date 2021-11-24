@@ -1,17 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { getUserByUsername } from '../utils/api';
 
-import Avatar from '@mui/material/Avatar';
+import { UserContext } from '../contexts/UserContext';
 
-export default function Comment({ comment }) {
-  const [user, setUser] = useState({});
+import Avatar from '@mui/material/Avatar';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+export default function Comment({ comment, articleAuthor }) {
+  const [author, setAuthor] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     setIsLoading(true);
     getUserByUsername(comment.author)
       .then((user) => {
-        setUser(user);
+        setAuthor(user);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -24,9 +29,12 @@ export default function Comment({ comment }) {
 
   return (
     <div>
-      <Avatar alt={user.name} src={user.avatar_url} />
-      <h3>{user.username}</h3>
+      <Avatar alt={author.name} src={author.avatar_url} />
+      <h3>{author.username}</h3>
       <h4>Created at: {comment.created_at}</h4>
+      {user.username === articleAuthor || user.username === comment.author ? (
+        <DeleteIcon />
+      ) : null}
       <p>{comment.body}</p>
       <p>Votes:{comment.votes}</p>
     </div>
