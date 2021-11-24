@@ -18,7 +18,9 @@ export default function Header() {
       </Link>
       {isLoggedIn ? (
         <>
-          <Avatar alt={user.name} src={user.avatar_url}></Avatar>
+          <Link to={`/users/${user.username}`}>
+            <Avatar alt={user.name} src={user.avatar_url}></Avatar>
+          </Link>
           <p>{user.username}</p>
           <Button
             variant="contained"
