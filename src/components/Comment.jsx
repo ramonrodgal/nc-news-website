@@ -58,14 +58,9 @@ export default function Comment({ comment, articleAuthor }) {
         console.log(err);
       });
   };
-  const handleUpVote = (e) => {
-    console.log(e.target);
-    updateCommentVotes(comment.comment_id, 1).then((comment) => {
-      setVotes(comment.votes);
-    });
-  };
-  const handleDownVote = () => {
-    console.log('downvote');
+  const handleVote = (vote) => {
+    setVotes((prevVotes) => prevVotes + vote);
+    updateCommentVotes(comment.comment_id, vote).then((comment) => {});
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -86,10 +81,10 @@ export default function Comment({ comment, articleAuthor }) {
       <p>Votes:{votes}</p>
       {isLoggedIn === true ? (
         <>
-          <Button onClick={handleUpVote}>
+          <Button onClick={() => handleVote(1)}>
             <ArrowUpwardIcon />
           </Button>
-          <Button onClick={handleDownVote}>
+          <Button onClick={() => handleVote(-1)}>
             <ArrowDownwardIcon />
           </Button>{' '}
         </>
