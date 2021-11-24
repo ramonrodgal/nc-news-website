@@ -41,13 +41,6 @@ export default function Comment({ comment, articleAuthor }) {
       });
   }, [comment.author]);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleCancel = () => {
-    setOpen(false);
-  };
   const handleDelete = () => {
     setOpen(false);
     deleteComment(comment.comment_id)
@@ -73,7 +66,11 @@ export default function Comment({ comment, articleAuthor }) {
       <h3>{author.username}</h3>
       <h4>Created at: {comment.created_at}</h4>
       {user.username === articleAuthor || user.username === comment.author ? (
-        <Button onClick={handleClickOpen}>
+        <Button
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
           <DeleteIcon />
         </Button>
       ) : null}
@@ -93,7 +90,7 @@ export default function Comment({ comment, articleAuthor }) {
       {/* Alert window */}
       <Dialog
         open={open}
-        onClose={handleCancel}
+        onClose={() => setOpen(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -105,7 +102,7 @@ export default function Comment({ comment, articleAuthor }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel}>Cancel</Button>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button onClick={handleDelete} autoFocus>
             Delete
           </Button>
