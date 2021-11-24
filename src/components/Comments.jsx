@@ -45,23 +45,25 @@ export default function Comments({ article_id, articleAuthor }) {
   return (
     <div>
       <h2>Comments</h2>
-      <FormControl>
-        <TextField
-          id="outlined-textarea"
-          label="Write a comment"
-          multiline
-          onBlur={(e) => {
-            setNewComment(e.target.value);
-          }}
-        />
-        <Button
-          onClick={handlePostComment}
-          variant="contained"
-          endIcon={<SendIcon />}
-        >
-          Send
-        </Button>
-      </FormControl>
+      {user.username ? (
+        <FormControl>
+          <TextField
+            id="outlined-textarea"
+            label="Write a comment"
+            multiline
+            onBlur={(e) => {
+              setNewComment(e.target.value);
+            }}
+          />
+          <Button
+            onClick={handlePostComment}
+            variant="contained"
+            endIcon={<SendIcon />}
+          >
+            Send
+          </Button>
+        </FormControl>
+      ) : null}
       {comments.map((comment) => {
         return (
           <Comment
