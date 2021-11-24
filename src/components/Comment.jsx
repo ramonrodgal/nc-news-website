@@ -13,8 +13,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
 export default function Comment({ comment, articleAuthor }) {
-  const { user } = useContext(UserContext);
+  const { user, isLoggedIn } = useContext(UserContext);
   const [author, setAuthor] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [open, setOpen] = useState(false);
@@ -33,16 +36,6 @@ export default function Comment({ comment, articleAuthor }) {
       });
   }, []);
 
-  const removeComment = (comment_id) => {
-    deleteComment(comment_id)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -51,9 +44,20 @@ export default function Comment({ comment, articleAuthor }) {
     setOpen(false);
   };
   const handleDelete = () => {
-    removeComment(comment.comment_id);
     setOpen(false);
-    setIsdeleted(true);
+    deleteComment(comment.comment_id)
+      .then((response) => {
+        setIsdeleted(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleUpVote = () => {
+    console.log('upvote');
+  };
+  const handleDownVote = () => {
+    console.log('downvote');
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -72,6 +76,18 @@ export default function Comment({ comment, articleAuthor }) {
       ) : null}
       <p>{comment.body}</p>
       <p>Votes:{comment.votes}</p>
+      {isLoggedIn === true ? (
+        <>
+          <Button onClick={handleUpVote}>
+            <ArrowUpwardIcon />
+          </Button>
+          <Button onClick={handleDownVote}>
+            <ArrowDownwardIcon />
+          </Button>{' '}
+        </>
+      ) : null}
+
+      {/* Alert window */}
       <Dialog
         open={open}
         onClose={handleCancel}
