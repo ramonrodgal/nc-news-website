@@ -47,9 +47,17 @@ export const deleteComment = (comment_id) => {
 };
 
 export const updateCommentVotes = (comment_id, vote) => {
-  const body = { inc_votes: vote };
+  return ncNewsApi
+    .patch(`/comments/${comment_id}`, { inc_votes: vote })
+    .then((response) => {
+      return response.data.comment;
+    });
+};
 
-  return ncNewsApi.patch(`/comments/${comment_id}`, body).then((response) => {
-    return response.data.comment;
-  });
+export const updateArticleVotes = (article_id, vote) => {
+  return ncNewsApi
+    .patch(`/articles/${article_id}`, { inc_votes: vote })
+    .then((response) => {
+      return response.data.article;
+    });
 };
