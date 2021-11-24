@@ -4,14 +4,23 @@ import { getArticleById } from '../utils/api';
 import Comments from '../components/Comments';
 
 export default function Article() {
-  const [article, setArticle] = useState({});
   const { article_id } = useParams();
+  const [article, setArticle] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getArticleById(article_id).then((article) => {
       setArticle(article);
+      setIsLoading(false);
     });
   }, [article_id]);
+
+  if (isLoading)
+    return (
+      <main>
+        <p>Loading...</p>
+      </main>
+    );
 
   return (
     <main>
