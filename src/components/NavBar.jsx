@@ -22,12 +22,13 @@ export default function NavBar() {
   return (
     <div>
       <select
+        defaultValue="default"
         name="topics"
         onChange={(e) => {
           navigate(`/articles/${e.target.value}`);
         }}
       >
-        <option disabled selected>
+        <option disabled value="default">
           Select topics
         </option>
         {topics.map((topic) => {

@@ -9,8 +9,6 @@ export default function ArticlesList() {
   const [isLoading, setIsloading] = useState(true);
   const { topic } = useParams();
 
-  console.log(topic);
-
   useEffect(() => {
     getArticles(topic).then((articles) => {
       setArticles(articles);
@@ -28,8 +26,11 @@ export default function ArticlesList() {
       <div>
         {articles.map((article) => {
           return (
-            <Link to={`/articles/${article.topic}/${article.article_id}`}>
-              <ArticleCard key={article.article_id} article={{ ...article }} />
+            <Link
+              key={article.article_id}
+              to={`/articles/${article.topic}/${article.article_id}`}
+            >
+              <ArticleCard article={{ ...article }} />
             </Link>
           );
         })}

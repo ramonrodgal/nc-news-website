@@ -1,5 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
-import { getUserByUsername, deleteComment } from '../utils/api';
+import {
+  getUserByUsername,
+  deleteComment,
+  updateCommentVotes,
+} from '../utils/api';
 
 import { UserContext } from '../contexts/UserContext';
 
@@ -22,6 +26,7 @@ export default function Comment({ comment, articleAuthor }) {
   const [isLoading, setIsLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [isDeleted, setIsdeleted] = useState(false);
+  const [votes, setVotes] = useState(comment.votes);
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,7 +39,7 @@ export default function Comment({ comment, articleAuthor }) {
         console.log(err);
         setIsLoading(false);
       });
-  }, []);
+  }, [comment.author]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -53,8 +58,11 @@ export default function Comment({ comment, articleAuthor }) {
         console.log(err);
       });
   };
-  const handleUpVote = () => {
-    console.log('upvote');
+  const handleUpVote = (e) => {
+    console.log(e.target);
+    updateCommentVotes(comment.comment_id, 1).then((comment) => {
+      setVotes(comment.votes);
+    });
   };
   const handleDownVote = () => {
     console.log('downvote');
@@ -75,7 +83,7 @@ export default function Comment({ comment, articleAuthor }) {
         </Button>
       ) : null}
       <p>{comment.body}</p>
-      <p>Votes:{comment.votes}</p>
+      <p>Votes:{votes}</p>
       {isLoggedIn === true ? (
         <>
           <Button onClick={handleUpVote}>

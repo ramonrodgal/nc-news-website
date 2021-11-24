@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { getUserByUsername } from '../utils/api';
 
 import Avatar from '@mui/material/Avatar';
@@ -16,7 +17,7 @@ export default function User() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [username]);
 
   return (
     <div>

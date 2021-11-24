@@ -9,8 +9,6 @@ import { Link } from 'react-router-dom';
 export default function Header() {
   const { user, isLoggedIn, setUser } = useContext(UserContext);
 
-  console.log(isLoggedIn);
-
   return (
     <header>
       <Link to="/">
@@ -36,9 +34,9 @@ export default function Header() {
           <Link to="/login">
             <Button variant="contained">Log In</Button>
           </Link>
-          <Link to="/signup">
+          {/* <Link to="/signup">
             <Button variant="contained">Sign Up</Button>
-          </Link>
+          </Link> */}
         </>
       )}
     </header>

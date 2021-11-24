@@ -45,3 +45,11 @@ export const deleteComment = (comment_id) => {
     return response;
   });
 };
+
+export const updateCommentVotes = (comment_id, vote) => {
+  const body = { inc_votes: vote };
+
+  return ncNewsApi.patch(`/comments/${comment_id}`, body).then((response) => {
+    return response.data.comment;
+  });
+};
