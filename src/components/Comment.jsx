@@ -7,6 +7,8 @@ import {
 
 import { UserContext } from '../contexts/UserContext';
 
+import { Link } from 'react-router-dom';
+
 import Avatar from '@mui/material/Avatar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
@@ -63,8 +65,10 @@ export default function Comment({ comment, articleAuthor }) {
 
   return (
     <div>
-      <Avatar alt={author.name} src={author.avatar_url} />
-      <h3>{author.username}</h3>
+      <Link to={`/users/${author.username}`}>
+        <Avatar alt={author.name} src={author.avatar_url} />
+        <h3>{author.username}</h3>
+      </Link>
       <h4>Created at: {comment.created_at}</h4>
       {user.username === articleAuthor || user.username === comment.author ? (
         <Button
