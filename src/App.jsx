@@ -20,7 +20,7 @@ function App() {
         <Route path="/articles/:topic/:article_id" element={<Article />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/users/:user_id" element={<User />} />
+        <Route path="/users/:username" element={<User />} />
       </Routes>
       <Footer />
     </div>
