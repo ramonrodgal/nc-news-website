@@ -39,3 +39,9 @@ export const getUserByUsername = (username) => {
     return res.data.user;
   });
 };
+
+export const deleteComment = (comment_id) => {
+  return ncNewsApi.delete(`comments/${comment_id}`).then((response) => {
+    return response;
+  });
+};
