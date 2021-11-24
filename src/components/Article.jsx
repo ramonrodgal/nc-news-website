@@ -10,7 +10,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default function Article() {
   const { article_id } = useParams();
-  const { isLoggedIn } = useContext(UserContext);
+  const { user, isLoggedIn } = useContext(UserContext);
 
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -51,7 +51,7 @@ export default function Article() {
       </p>
       <p>{article.body}</p>
       <p>Votes:{votes}</p>
-      {isLoggedIn === true ? (
+      {isLoggedIn === true && user.username !== article.author ? (
         <>
           <Button onClick={() => handleVote(1)}>
             <ArrowUpwardIcon />
