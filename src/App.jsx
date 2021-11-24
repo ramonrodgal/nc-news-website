@@ -7,6 +7,7 @@ import Article from './components/Article';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import User from './components/User';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/users/:user_id" element={<User />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
