@@ -4,6 +4,7 @@ import { getArticleById, updateArticleVotes } from '../utils/api';
 import Comments from '../components/Comments';
 import { UserContext } from '../contexts/UserContext';
 
+import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -17,11 +18,16 @@ export default function Article() {
   const [votes, setVotes] = useState(0);
 
   useEffect(() => {
-    getArticleById(article_id).then((article) => {
-      setArticle(article);
-      setIsLoading(false);
-      setVotes(article.votes);
-    });
+    getArticleById(article_id)
+      .then((article) => {
+        setArticle(article);
+        setIsLoading(false);
+        setVotes(article.votes);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
   }, [article_id]);
 
   const handleVote = (vote) => {
@@ -38,7 +44,7 @@ export default function Article() {
   if (isLoading)
     return (
       <main>
-        <p>Loading...</p>
+        <CircularProgress />
       </main>
     );
 

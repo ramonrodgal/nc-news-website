@@ -4,6 +4,7 @@ import Comment from './Comment';
 
 import { UserContext } from '../contexts/UserContext';
 
+import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
@@ -23,6 +24,7 @@ export default function Comments({ article_id, articleAuthor }) {
       })
       .catch((err) => {
         console.log(err);
+        setIsloading(false);
       });
   }, [article_id]);
 
@@ -40,7 +42,12 @@ export default function Comments({ article_id, articleAuthor }) {
       });
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <div>

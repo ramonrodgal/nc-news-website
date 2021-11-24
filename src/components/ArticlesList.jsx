@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import ArticleCard from './ArticleCard';
 import { getArticles } from '../utils/api';
 import { useParams, Link } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ArticlesList() {
   const [articles, setArticles] = useState([]);
@@ -10,14 +11,23 @@ export default function ArticlesList() {
   const { topic } = useParams();
 
   useEffect(() => {
-    getArticles(topic).then((articles) => {
-      setArticles(articles);
-      setIsloading(false);
-    });
+    getArticles(topic)
+      .then((articles) => {
+        setArticles(articles);
+        setIsloading(false);
+      })
+      .catch((err) => {
+        setIsloading(false);
+        console.log(err);
+      });
   }, [topic]);
 
   if (isLoading) {
-    return <p>loading...</p>;
+    return (
+      <main>
+        <CircularProgress />
+      </main>
+    );
   }
 
   return (

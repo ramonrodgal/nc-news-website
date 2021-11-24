@@ -3,20 +3,31 @@ import { useState, useEffect } from 'react';
 import { getTopics } from '../utils/api';
 import { useNavigate } from 'react-router';
 
+import CircularProgress from '@mui/material/CircularProgress';
+
 export default function NavBar() {
   const [topics, setTopics] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   let navigate = useNavigate();
 
   useEffect(() => {
-    getTopics().then((topics) => {
-      setTopics(topics);
-      setIsLoading(false);
-    });
+    getTopics()
+      .then((topics) => {
+        setTopics(topics);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (

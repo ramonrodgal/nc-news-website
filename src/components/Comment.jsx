@@ -9,6 +9,7 @@ import { UserContext } from '../contexts/UserContext';
 
 import { Link } from 'react-router-dom';
 
+import CircularProgress from '@mui/material/CircularProgress';
 import Avatar from '@mui/material/Avatar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
@@ -59,7 +60,12 @@ export default function Comment({ comment, articleAuthor }) {
     updateCommentVotes(comment.comment_id, vote).then((comment) => {});
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
 
   if (isDeleted) return null;
 
