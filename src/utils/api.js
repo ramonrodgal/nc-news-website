@@ -61,3 +61,11 @@ export const updateArticleVotes = (article_id, vote) => {
       return response.data.article;
     });
 };
+
+export const postComment = (article_id, body) => {
+  return ncNewsApi
+    .post(`/articles/${article_id}/comments`, body)
+    .then((response) => {
+      return response.data.comment;
+    });
+};
