@@ -22,6 +22,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default function Comment({ comment, articleAuthor }) {
   const { user, isLoggedIn } = useContext(UserContext);
+
   const [author, setAuthor] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [open, setOpen] = useState(false);
