@@ -4,6 +4,10 @@ import { getTopics } from '../utils/api';
 import { useNavigate } from 'react-router';
 
 import CircularProgress from '@mui/material/CircularProgress';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export default function NavBar() {
   const [topics, setTopics] = useState({});
@@ -31,25 +35,22 @@ export default function NavBar() {
   }
 
   return (
-    <div>
-      <select
-        defaultValue="default"
-        name="topics"
+    <FormControl fullWidth>
+      <InputLabel>Topic</InputLabel>
+      <Select
+        label="Topic"
         onChange={(e) => {
           navigate(`/articles/${e.target.value}`);
         }}
       >
-        <option disabled value="default">
-          Select topics
-        </option>
         {topics.map((topic) => {
           return (
-            <option key={topic.slug} value={topic.slug}>
+            <MenuItem key={topic.slug} value={topic.slug}>
               {topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)}
-            </option>
+            </MenuItem>
           );
         })}
-      </select>
-    </div>
+      </Select>
+    </FormControl>
   );
 }
