@@ -1,10 +1,15 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { getArticleById, updateArticleVotes } from '../utils/api';
+import {
+  getArticleById,
+  updateArticleVotes,
+  getUserByUsername,
+} from '../utils/api';
 import Comments from '../components/Comments';
 import { UserContext } from '../contexts/UserContext';
 
 import CircularProgress from '@mui/material/CircularProgress';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -14,6 +19,7 @@ export default function Article() {
   const { user, isLoggedIn } = useContext(UserContext);
 
   const [article, setArticle] = useState({});
+  const [author, setAuthor] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [votes, setVotes] = useState(0);
 
@@ -21,8 +27,12 @@ export default function Article() {
     getArticleById(article_id)
       .then((article) => {
         setArticle(article);
-        setIsLoading(false);
+
         setVotes(article.votes);
+        return getUserByUsername(article.author).then((author) => {
+          setAuthor(author);
+          setIsLoading(false);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -52,6 +62,7 @@ export default function Article() {
     <main>
       <h2>{article.title}</h2>
       <h3>{article.topic}</h3>
+      <Avatar alt={author.name} src={author.avatar_url} />
       <p>
         {article.author} - created at {article.created_at}
       </p>
