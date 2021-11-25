@@ -8,10 +8,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 export default function ArticlesList() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsloading] = useState(true);
+  const [sortBy, setSortBy] = useState();
   const { topic } = useParams();
 
   useEffect(() => {
-    getArticles(topic)
+    getArticles(topic, sortBy)
       .then((articles) => {
         setArticles(articles);
         setIsloading(false);
@@ -20,7 +21,7 @@ export default function ArticlesList() {
         setIsloading(false);
         console.log(err);
       });
-  }, [topic]);
+  }, [topic, sortBy]);
 
   if (isLoading) {
     return (
@@ -32,7 +33,7 @@ export default function ArticlesList() {
 
   return (
     <main>
-      <NavBar topic={topic} />
+      <NavBar topic={topic} sortBy={sortBy} setSortBy={setSortBy} />
       <div>
         {articles.map((article) => {
           return (

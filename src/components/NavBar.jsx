@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function NavBar({ topic = '' }) {
+export default function NavBar({ topic = '', sortBy = '', setSortBy }) {
   const [topics, setTopics] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   let navigate = useNavigate();
@@ -35,24 +35,40 @@ export default function NavBar({ topic = '' }) {
   }
 
   return (
-    <FormControl fullWidth>
-      <InputLabel id="select-topic">Topic</InputLabel>
-      <Select
-        labelId="select-topic"
-        label="Topic"
-        value={topic}
-        onChange={(e) => {
-          navigate(`/articles/${e.target.value}`);
-        }}
-      >
-        {topics.map((topic) => {
-          return (
-            <MenuItem key={topic.slug} value={topic.slug}>
-              {topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)}
-            </MenuItem>
-          );
-        })}
-      </Select>
-    </FormControl>
+    <div>
+      <FormControl fullWidth>
+        <InputLabel id="select-topic">Topic</InputLabel>
+        <Select
+          labelId="select-topic"
+          label="Topic"
+          value={topic}
+          onChange={(e) => {
+            navigate(`/articles/${e.target.value}`);
+          }}
+        >
+          {topics.map((topic) => {
+            return (
+              <MenuItem key={topic.slug} value={topic.slug}>
+                {topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
+      <FormControl fullWidth>
+        <InputLabel>Sort by</InputLabel>
+        <Select
+          label="Sort by"
+          value={sortBy}
+          onChange={(e) => {
+            setSortBy(e.target.value);
+          }}
+        >
+          <MenuItem value="created_at">Most recent</MenuItem>
+          <MenuItem value="votes">Popular</MenuItem>
+          <MenuItem value="comment_count">Controversial</MenuItem>
+        </Select>
+      </FormControl>
+    </div>
   );
 }
