@@ -35,6 +35,7 @@ export default function User() {
     <main>
       <Avatar alt={user.name} src={user.avatar_url} />
       <h2>{user.username}</h2>
+      <h2>Articles</h2>
       <div>
         {articles.map((article) => {
           return (
