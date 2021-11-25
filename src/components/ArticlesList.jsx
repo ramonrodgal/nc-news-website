@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import ArticleCard from './ArticleCard';
 import { getArticles } from '../utils/api';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ArticlesList() {
@@ -36,12 +36,7 @@ export default function ArticlesList() {
       <div>
         {articles.map((article) => {
           return (
-            <Link
-              key={article.article_id}
-              to={`/articles/${article.topic}/${article.article_id}`}
-            >
-              <ArticleCard article={{ ...article }} />
-            </Link>
+            <ArticleCard key={article.article_id} article={{ ...article }} />
           );
         })}
       </div>
