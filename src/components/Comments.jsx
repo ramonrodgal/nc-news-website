@@ -35,6 +35,7 @@ export default function Comments({ article_id, articleAuthor }) {
     };
     postComment(article_id, body)
       .then((comment) => {
+        setNewComment('');
         setComments([comment, ...comments]);
       })
       .catch((err) => {
@@ -58,9 +59,10 @@ export default function Comments({ article_id, articleAuthor }) {
             id="outlined-textarea"
             label="Write a comment"
             multiline
-            onBlur={(e) => {
+            onChange={(e) => {
               setNewComment(e.target.value);
             }}
+            value={newComment}
           />
           <Button
             onClick={handlePostComment}
