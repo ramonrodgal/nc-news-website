@@ -6,6 +6,7 @@ import { UserContext } from '../contexts/UserContext';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -13,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 export default function Comments({ article_id, articleAuthor }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsloading] = useState(true);
+  const [isPosting, setIsPosting] = useState(false);
   const [newComment, setNewComment] = useState('');
   const { user } = useContext(UserContext);
 
@@ -29,6 +31,7 @@ export default function Comments({ article_id, articleAuthor }) {
   }, [article_id]);
 
   const handlePostComment = () => {
+    setIsPosting(true);
     const body = {
       username: user.username,
       body: newComment,
@@ -37,9 +40,11 @@ export default function Comments({ article_id, articleAuthor }) {
       .then((comment) => {
         setNewComment('');
         setComments([comment, ...comments]);
+        setIsPosting(false);
       })
       .catch((err) => {
         console.lod(err);
+        setIsPosting(false);
       });
   };
 
@@ -64,11 +69,16 @@ export default function Comments({ article_id, articleAuthor }) {
             }}
             value={newComment}
           />
-          <Button
+          <LoadingButton
             onClick={handlePostComment}
-            variant="contained"
             endIcon={<SendIcon />}
+            loading={isPosting}
+            loadingPosition="end"
+            variant="contained"
           >
+            Send
+          </LoadingButton>
+          <Button variant="contained" endIcon={<SendIcon />}>
             Send
           </Button>
         </FormControl>
