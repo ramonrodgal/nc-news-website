@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import ArticlesList from './components/ArticlesList';
 import Article from './components/Article';
+import CreateArticle from './components/CreateArticle';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import User from './components/User';
@@ -18,6 +19,7 @@ function App() {
         <Route path="*" element={<NotFound />}></Route>
         <Route path="/" element={<ArticlesList />} />
         <Route path="/articles" element={<ArticlesList />} />
+        <Route path="/create-article" element={<CreateArticle />} />
         <Route path="/articles/:topic" element={<ArticlesList />} />
         <Route path="/articles/:topic/:article_id" element={<Article />} />
         <Route path="/login" element={<LogIn />} />
