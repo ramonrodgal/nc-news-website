@@ -32,7 +32,7 @@ export default function ArticlesList() {
 
   return (
     <main>
-      <NavBar />
+      <NavBar topic={topic} />
       <div>
         {articles.map((article) => {
           return (

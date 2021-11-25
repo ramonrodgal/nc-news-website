@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function NavBar() {
+export default function NavBar({ topic = '' }) {
   const [topics, setTopics] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   let navigate = useNavigate();
@@ -36,10 +36,11 @@ export default function NavBar() {
 
   return (
     <FormControl fullWidth>
-      <InputLabel>Topic</InputLabel>
+      <InputLabel id="select-topic">Topic</InputLabel>
       <Select
+        labelId="select-topic"
         label="Topic"
-        value=""
+        value={topic}
         onChange={(e) => {
           navigate(`/articles/${e.target.value}`);
         }}
