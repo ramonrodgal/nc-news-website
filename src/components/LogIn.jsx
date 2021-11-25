@@ -32,7 +32,12 @@ export default function LogIn() {
       <Typography variant="h2">Log In</Typography>
       <form onSubmit={handleSubmit}>
         <FormControl>
-          <TextField label="Username" variant="outlined" required></TextField>
+          <TextField
+            label="Username"
+            variant="outlined"
+            placeholder="jessjelly"
+            required
+          ></TextField>
           <Button variant="contained" type="submit">
             Log In
           </Button>
