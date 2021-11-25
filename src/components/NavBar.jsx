@@ -39,6 +39,7 @@ export default function NavBar() {
       <InputLabel>Topic</InputLabel>
       <Select
         label="Topic"
+        value=""
         onChange={(e) => {
           navigate(`/articles/${e.target.value}`);
         }}
