@@ -65,6 +65,7 @@ export default function Comments({ article_id, articleAuthor }) {
               id="outlined-textarea"
               label="Write a comment"
               multiline
+              required
             />
             <LoadingButton
               type="submit"
