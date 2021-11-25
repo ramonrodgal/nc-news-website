@@ -10,13 +10,12 @@ export const getTopics = () => {
   });
 };
 
-export const getArticles = (topic, sort_by, order) => {
+export const getArticles = (topic, sort_by) => {
   return ncNewsApi
     .get('/articles', {
       params: {
         topic: topic,
         sort_by: sort_by,
-        order: order,
       },
     })
     .then((res) => {
@@ -70,4 +69,10 @@ export const postComment = (article_id, body) => {
     .then((response) => {
       return response.data.comment;
     });
+};
+
+export const getArticlesByUsername = (username) => {
+  return ncNewsApi.get(`/users/${username}/articles`).then((response) => {
+    return response.data.articles;
+  });
 };

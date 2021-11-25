@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getUserByUsername } from '../utils/api';
+import ArticleCard from './ArticleCard';
+
+import { getUserByUsername, getArticlesByUsername } from '../utils/api';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import Avatar from '@mui/material/Avatar';
@@ -9,12 +11,16 @@ import Avatar from '@mui/material/Avatar';
 export default function User() {
   const { username } = useParams();
   const [user, setUser] = useState({});
+  const [articles, setArticles] = useState([]);
   const [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {
     getUserByUsername(username)
       .then((user) => {
         setUser(user);
+        getArticlesByUsername(user.username).then((articles) => {
+          setArticles(articles);
+        });
         setIsloading(false);
       })
       .catch((err) => {
@@ -26,9 +32,16 @@ export default function User() {
   if (isLoading) return <CircularProgress />;
 
   return (
-    <div>
+    <main>
       <Avatar alt={user.name} src={user.avatar_url} />
       <h2>{user.username}</h2>
-    </div>
+      <div>
+        {articles.map((article) => {
+          return (
+            <ArticleCard key={article.article_id} article={{ ...article }} />
+          );
+        })}
+      </div>
+    </main>
   );
 }
