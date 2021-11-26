@@ -8,6 +8,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 export default function NavBar({ topic = '', sortBy = '', setSortBy }) {
   const [topics, setTopics] = useState({});
@@ -35,40 +37,46 @@ export default function NavBar({ topic = '', sortBy = '', setSortBy }) {
   }
 
   return (
-    <div>
-      <FormControl fullWidth>
-        <InputLabel id="select-topic">Topic</InputLabel>
-        <Select
-          labelId="select-topic"
-          label="Topic"
-          value={topic}
-          onChange={(e) => {
-            navigate(`/articles/${e.target.value}`);
-          }}
-        >
-          {topics.map((topic) => {
-            return (
-              <MenuItem key={topic.slug} value={topic.slug}>
-                {topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
-      <FormControl fullWidth>
-        <InputLabel>Sort by</InputLabel>
-        <Select
-          label="Sort by"
-          value={sortBy}
-          onChange={(e) => {
-            setSortBy(e.target.value);
-          }}
-        >
-          <MenuItem value="created_at">Most recent</MenuItem>
-          <MenuItem value="votes">Popular</MenuItem>
-          <MenuItem value="comment_count">Controversial</MenuItem>
-        </Select>
-      </FormControl>
-    </div>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container>
+        <Grid item xs={6} md={2}>
+          <FormControl fullWidth>
+            <InputLabel id="select-topic">Topic</InputLabel>
+            <Select
+              labelId="select-topic"
+              label="Topic"
+              value={topic}
+              onChange={(e) => {
+                navigate(`/articles/${e.target.value}`);
+              }}
+            >
+              {topics.map((topic) => {
+                return (
+                  <MenuItem key={topic.slug} value={topic.slug}>
+                    {topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6} md={2}>
+          <FormControl fullWidth>
+            <InputLabel>Sort by</InputLabel>
+            <Select
+              label="Sort by"
+              value={sortBy}
+              onChange={(e) => {
+                setSortBy(e.target.value);
+              }}
+            >
+              <MenuItem value="created_at">Most recent</MenuItem>
+              <MenuItem value="votes">Popular</MenuItem>
+              <MenuItem value="comment_count">Controversial</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

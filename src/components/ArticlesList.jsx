@@ -4,6 +4,8 @@ import ArticleCard from './ArticleCard';
 import { getArticles } from '../utils/api';
 import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 export default function ArticlesList() {
   const [articles, setArticles] = useState([]);
@@ -33,14 +35,23 @@ export default function ArticlesList() {
 
   return (
     <main>
-      <NavBar topic={topic} sortBy={sortBy} setSortBy={setSortBy} />
-      <div>
-        {articles.map((article) => {
-          return (
-            <ArticleCard key={article.article_id} article={{ ...article }} />
-          );
-        })}
-      </div>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container>
+          <Grid item xs={12}>
+            <NavBar topic={topic} sortBy={sortBy} setSortBy={setSortBy} />
+          </Grid>
+          {articles.map((article) => {
+            return (
+              <Grid item xs={12} md={6}>
+                <ArticleCard
+                  key={article.article_id}
+                  article={{ ...article }}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Box>
     </main>
   );
 }
