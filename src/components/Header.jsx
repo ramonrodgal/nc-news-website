@@ -16,12 +16,12 @@ export default function Header() {
     <header>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container>
-          <Grid item xs={10}>
+          <Grid item xs={8} sm={10}>
             <Link to="/">
               <Typography variant="h1">NC News</Typography>
             </Link>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={4} sm={2}>
             {isLoggedIn ? (
               <>
                 <Link to={`/users/${user.username}`}>
