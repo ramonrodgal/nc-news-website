@@ -55,8 +55,8 @@ export default function LogIn() {
             </Button>
           </FormControl>
         </form>
-        {isError ? <p>Invalid username</p> : null}
       </Box>
+      {isError ? <p className="error-message">Invalid username</p> : null}
     </main>
   );
 }
