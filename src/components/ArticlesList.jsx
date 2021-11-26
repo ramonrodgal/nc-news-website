@@ -13,9 +13,6 @@ export default function ArticlesList({ author }) {
   const [sortBy, setSortBy] = useState();
   const [topic, setTopic] = useState(useParams().topic);
 
-  // const { topic } = useParams();
-  // console.log(useParams().topic);
-
   useEffect(() => {
     getArticles(topic, sortBy, author)
       .then((articles) => {

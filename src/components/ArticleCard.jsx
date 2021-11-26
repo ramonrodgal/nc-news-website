@@ -40,7 +40,9 @@ export default function ArticleCard({ article }) {
         <CardContent>
           <Grid container>
             <Grid item xs={10}>
-              <h2>{article.title}</h2>
+              <Link to={`/articles/${article.topic}/${article.article_id}`}>
+                <h2>{article.title}</h2>
+              </Link>
             </Grid>
             <Grid item xs={2}>
               <p>{article.topic}</p>
