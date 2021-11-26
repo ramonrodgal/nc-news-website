@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getUserByUsername } from '../utils/api';
 
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+
 import CircularProgress from '@mui/material/CircularProgress';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -32,27 +35,36 @@ export default function ArticleCard({ article }) {
     );
 
   return (
-    <Card>
-      <CardContent>
-        <h2>{article.title}</h2>
-        <Link to={`users/${article.author}`}>
-          <Avatar alt={author.name} src={author.avatar_url} />
-        </Link>
-        <p>
-          Author: <Link to={`users/${article.author}`}>{article.author}</Link> -{' '}
-          {article.created_at}
-        </p>
-        <p>Votes: {article.votes}</p>
-        <p>{article.topic}</p>
-        <p>{article.body}</p>
-      </CardContent>
-      <CardActions>
-        <Link to={`/articles/${article.topic}/${article.article_id}`}>
-          <Button size="small" variant="contained">
-            Read More
-          </Button>
-        </Link>
-      </CardActions>
-    </Card>
+    <Box sx={{ flexGrow: 1 }}>
+      <Card>
+        <CardContent>
+          <Grid container>
+            <Grid item xs={10}>
+              <h2>{article.title}</h2>
+            </Grid>
+            <Grid item xs={2}>
+              <p>{article.topic}</p>
+              <p>Votes: {article.votes}</p>
+            </Grid>
+            <Link to={`users/${article.author}`}>
+              <Avatar alt={author.name} src={author.avatar_url} />
+            </Link>
+            <p>
+              <Link to={`users/${article.author}`}>{article.author}</Link> -{' '}
+              {new Date('2020-11-22T11:13:00.000Z').toDateString()}
+            </p>
+
+            <p>{article.body.slice(0, 200)}...</p>
+          </Grid>
+        </CardContent>
+        <CardActions>
+          <Link to={`/articles/${article.topic}/${article.article_id}`}>
+            <Button size="small" variant="contained">
+              Read More
+            </Button>
+          </Link>
+        </CardActions>
+      </Card>
+    </Box>
   );
 }
