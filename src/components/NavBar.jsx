@@ -11,7 +11,13 @@ import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-export default function NavBar({ topic = '', sortBy = '', setSortBy }) {
+export default function NavBar({
+  setTopic,
+  author,
+  topic = '',
+  sortBy = '',
+  setSortBy,
+}) {
   const [topics, setTopics] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   let navigate = useNavigate();
@@ -47,7 +53,10 @@ export default function NavBar({ topic = '', sortBy = '', setSortBy }) {
               label="Topic"
               value={topic}
               onChange={(e) => {
-                navigate(`/articles/${e.target.value}`);
+                setTopic(e.target.value);
+                if (!author) {
+                  navigate(`/articles/${e.target.value}`);
+                }
               }}
             >
               {topics.map((topic) => {

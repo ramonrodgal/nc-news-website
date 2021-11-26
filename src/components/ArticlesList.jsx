@@ -7,14 +7,17 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-export default function ArticlesList() {
+export default function ArticlesList({ author }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [sortBy, setSortBy] = useState();
-  const { topic } = useParams();
+  const [topic, setTopic] = useState(useParams().topic);
+
+  // const { topic } = useParams();
+  // console.log(useParams().topic);
 
   useEffect(() => {
-    getArticles(topic, sortBy)
+    getArticles(topic, sortBy, author)
       .then((articles) => {
         setArticles(articles);
         setIsloading(false);
@@ -23,7 +26,7 @@ export default function ArticlesList() {
         setIsloading(false);
         console.log(err);
       });
-  }, [topic, sortBy]);
+  }, [topic, sortBy, author]);
 
   if (isLoading) {
     return (
@@ -38,7 +41,13 @@ export default function ArticlesList() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container>
           <Grid item xs={12}>
-            <NavBar topic={topic} sortBy={sortBy} setSortBy={setSortBy} />
+            <NavBar
+              author={author}
+              topic={topic}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              setTopic={setTopic}
+            />
           </Grid>
         </Grid>
         <Grid container spacing={4}>
