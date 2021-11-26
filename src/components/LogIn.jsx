@@ -2,6 +2,7 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
@@ -27,27 +28,35 @@ export default function LogIn() {
       .catch((err) => {
         console.log(err.msg);
         setIsError(true);
-        //Incorrect username
       });
   };
 
   return (
     <main>
-      <Typography variant="h2">Log In</Typography>
-      <form onSubmit={handleSubmit}>
-        <FormControl>
-          <TextField
-            label="Username"
-            variant="outlined"
-            placeholder="jessjelly"
-            required
-          ></TextField>
-          <Button variant="contained" type="submit">
-            Log In
-          </Button>
-        </FormControl>
-      </form>
-      {isError ? <p>Invalid username</p> : null}
+      <Typography variant="h2" sx={{ textAlign: 'center' }}>
+        Log In
+      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+          <FormControl>
+            <TextField
+              label="Username"
+              variant="outlined"
+              placeholder="jessjelly"
+              required
+            ></TextField>
+            <Button variant="contained" type="submit">
+              Log In
+            </Button>
+          </FormControl>
+        </form>
+        {isError ? <p>Invalid username</p> : null}
+      </Box>
     </main>
   );
 }
