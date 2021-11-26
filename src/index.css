@@ -24,13 +24,18 @@ a:visited {
 }
 
 header {
-  background-color: grey;
   padding: 10px;
-  margin: 0;
+  margin: 0 0 10px 0;
+  border-bottom: 2px solid black;
 }
 
 footer {
   background-color: black;
   color: white;
+  text-align: center;
+}
+
+.error-message {
+  color: red;
   text-align: center;
 }
