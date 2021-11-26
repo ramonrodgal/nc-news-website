@@ -23,7 +23,7 @@ export default function LogIn() {
       .then((user) => {
         setUser(user);
         setIsError(false);
-        navigate('/');
+        navigate(-1);
       })
       .catch((err) => {
         console.log(err.msg);
