@@ -20,7 +20,7 @@ export default function Comments({ article_id, articleAuthor }) {
     getComments(article_id)
       .then((comments) => {
         setIsloading(false);
-        setComments(comments);
+        setComments(comments.sort((a, b) => b.votes - a.votes));
       })
       .catch((err) => {
         console.log(err);
