@@ -5,7 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  max-width: 624px;
+  max-width: 1024px;
+  min-height: 100%;
+}
+
+html {
+  height: 100%;
 }
 
 code {
@@ -13,6 +18,19 @@ code {
     monospace;
 }
 
-header a:link {
+header a:link,
+a:visited {
   text-decoration: none;
+}
+
+header {
+  background-color: grey;
+  padding: 10px;
+  margin: 0;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
 }
