@@ -9,6 +9,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
+import Box from '@mui/material/Box';
 
 export default function Comments({ article_id, articleAuthor }) {
   const [comments, setComments] = useState([]);
@@ -59,25 +60,34 @@ export default function Comments({ article_id, articleAuthor }) {
     <div>
       <h2>Comments</h2>
       {user.username ? (
-        <form onSubmit={handlePostComment}>
-          <FormControl>
-            <TextField
-              id="outlined-textarea"
-              label="Write a comment"
-              multiline
-              required
-            />
-            <LoadingButton
-              type="submit"
-              endIcon={<SendIcon />}
-              loading={isPosting}
-              loadingPosition="end"
-              variant="contained"
-            >
-              Send
-            </LoadingButton>
-          </FormControl>
-        </form>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            margin: '20px',
+          }}
+        >
+          <form onSubmit={handlePostComment}>
+            <FormControl>
+              <TextField
+                id="outlined-textarea"
+                label="Write a comment"
+                multiline
+                required
+              />
+              <LoadingButton
+                type="submit"
+                endIcon={<SendIcon />}
+                loading={isPosting}
+                loadingPosition="end"
+                variant="contained"
+                sx={{ margin: '10px' }}
+              >
+                Send
+              </LoadingButton>
+            </FormControl>
+          </form>
+        </Box>
       ) : null}
       {comments.map((comment) => {
         return (
