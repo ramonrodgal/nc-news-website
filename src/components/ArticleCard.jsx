@@ -51,7 +51,7 @@ export default function ArticleCard({ article }) {
             </Link>
             <p>
               <Link to={`users/${article.author}`}>{article.author}</Link> -{' '}
-              {new Date('2020-11-22T11:13:00.000Z').toDateString()}
+              {new Date(article.created_at).toDateString()}
             </p>
 
             <p>{article.body.slice(0, 200)}...</p>
