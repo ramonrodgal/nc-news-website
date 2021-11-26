@@ -40,6 +40,8 @@ export default function ArticlesList() {
           <Grid item xs={12}>
             <NavBar topic={topic} sortBy={sortBy} setSortBy={setSortBy} />
           </Grid>
+        </Grid>
+        <Grid container spacing={4}>
           {articles.map((article) => {
             return (
               <Grid item xs={12} md={6}>
