@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../contexts/UserContext.jsx';
 
 import { getUserByUsername } from '../utils/api';
@@ -12,6 +12,7 @@ import { getUserByUsername } from '../utils/api';
 export default function LogIn() {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const [isError, setIsError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,10 +21,13 @@ export default function LogIn() {
     getUserByUsername(username)
       .then((user) => {
         setUser(user);
+        setIsError(false);
         navigate('/');
       })
       .catch((err) => {
         console.log(err.msg);
+        setIsError(true);
+        //Incorrect username
       });
   };
 
@@ -43,6 +47,7 @@ export default function LogIn() {
           </Button>
         </FormControl>
       </form>
+      {isError ? <p>Invalid username</p> : null}
     </main>
   );
 }
