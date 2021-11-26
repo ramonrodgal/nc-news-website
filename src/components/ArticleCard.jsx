@@ -46,11 +46,11 @@ export default function ArticleCard({ article }) {
               <p>{article.topic}</p>
               <p>Votes: {article.votes}</p>
             </Grid>
-            <Link to={`users/${article.author}`}>
+            <Link to={`/users/${article.author}`}>
               <Avatar alt={author.name} src={author.avatar_url} />
             </Link>
             <p>
-              <Link to={`users/${article.author}`}>{article.author}</Link> -{' '}
+              <Link to={`/users/${article.author}`}>{article.author}</Link> -{' '}
               {new Date(article.created_at).toDateString()}
             </p>
 
