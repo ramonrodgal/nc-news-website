@@ -36,7 +36,7 @@ export default function ArticleCard({ article }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Card>
+      <Card sx={{ height: '350px' }}>
         <CardContent>
           <Grid container>
             <Grid item xs={10}>
