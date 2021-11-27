@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import NavBar from './NavBar';
+import NotFound from './NotFound';
 import ArticleCard from './ArticleCard';
 import { getArticles } from '../utils/api';
 import { useParams } from 'react-router-dom';
+
 import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -10,6 +12,7 @@ import Box from '@mui/material/Box';
 export default function ArticlesList({ author }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsloading] = useState(true);
+  const [isError, setIsError] = useState(true);
   const [sortBy, setSortBy] = useState();
   const [topic, setTopic] = useState(useParams().topic);
 
@@ -18,10 +21,10 @@ export default function ArticlesList({ author }) {
       .then((articles) => {
         setArticles(articles);
         setIsloading(false);
+        setIsError(false);
       })
       .catch((err) => {
         setIsloading(false);
-        console.log(err);
       });
   }, [topic, sortBy, author]);
 
@@ -29,6 +32,14 @@ export default function ArticlesList({ author }) {
     return (
       <main>
         <CircularProgress />
+      </main>
+    );
+  }
+
+  if (isError) {
+    return (
+      <main>
+        <NotFound />
       </main>
     );
   }

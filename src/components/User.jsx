@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import ArticlesList from './ArticlesList';
+import NotFound from './NotFound';
 
 import { getUserByUsername } from '../utils/api';
 
@@ -12,20 +13,33 @@ export default function User() {
   const { username } = useParams();
   const [user, setUser] = useState({});
   const [isLoading, setIsloading] = useState(true);
+  const [isError, setIsError] = useState(true);
 
   useEffect(() => {
     getUserByUsername(username)
       .then((user) => {
-        setUser(user);
         setIsloading(false);
+        setUser(user);
+        setIsError(false);
       })
       .catch((err) => {
-        console.log(err);
         setIsloading(false);
       });
   }, [username]);
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <main>
+        <CircularProgress />
+      </main>
+    );
+
+  if (isError)
+    return (
+      <main>
+        <NotFound />
+      </main>
+    );
 
   return (
     <main>
