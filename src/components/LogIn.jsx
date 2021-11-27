@@ -26,7 +26,6 @@ export default function LogIn() {
         navigate(-1);
       })
       .catch((err) => {
-        console.log(err.msg);
         setIsError(true);
       });
   };
