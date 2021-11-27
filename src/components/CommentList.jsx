@@ -40,7 +40,9 @@ export default function CommentList({ article_id, articleAuthor }) {
     postComment(article_id, body)
       .then((comment) => {
         e.target[0].value = '';
-        setComments([comment, ...comments]);
+        setComments((currentComments) => {
+          return [comment, ...currentComments];
+        });
         setIsPosting(false);
       })
       .catch((err) => {
