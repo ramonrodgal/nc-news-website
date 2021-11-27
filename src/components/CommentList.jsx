@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 
-export default function Comments({ article_id, articleAuthor }) {
+export default function CommentList({ article_id, articleAuthor }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [isPosting, setIsPosting] = useState(false);

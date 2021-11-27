@@ -5,7 +5,7 @@ import {
   updateArticleVotes,
   getUserByUsername,
 } from '../utils/api';
-import Comments from '../components/Comments';
+import CommentList from './CommentList';
 import { UserContext } from '../contexts/UserContext';
 
 import CircularProgress from '@mui/material/CircularProgress';
@@ -102,7 +102,10 @@ export default function Article() {
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <Comments article_id={article_id} articleAuthor={article.author} />
+            <CommentList
+              article_id={article_id}
+              articleAuthor={article.author}
+            />
           </Grid>
         </Grid>
       </Box>
