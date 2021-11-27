@@ -6,6 +6,7 @@ import {
   getUserByUsername,
 } from '../utils/api';
 import CommentList from './CommentList';
+import NotFound from './NotFound';
 import { UserContext } from '../contexts/UserContext';
 
 import CircularProgress from '@mui/material/CircularProgress';
@@ -23,6 +24,7 @@ export default function Article() {
   const [article, setArticle] = useState({});
   const [author, setAuthor] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [votes, setVotes] = useState(0);
 
   useEffect(() => {
@@ -37,6 +39,7 @@ export default function Article() {
         });
       })
       .catch((err) => {
+        setIsError(true);
         console.log(err);
         setIsLoading(false);
       });
@@ -57,6 +60,13 @@ export default function Article() {
     return (
       <main>
         <CircularProgress />
+      </main>
+    );
+
+  if (isError)
+    return (
+      <main>
+        <NotFound />
       </main>
     );
 
