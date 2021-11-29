@@ -15,6 +15,7 @@ export default function CommentList({ article_id, articleAuthor }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [isPosting, setIsPosting] = useState(false);
+  const [comment, setComment] = useState('');
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -39,10 +40,10 @@ export default function CommentList({ article_id, articleAuthor }) {
     };
     postComment(article_id, body)
       .then((comment) => {
-        e.target[0].value = '';
         setComments((currentComments) => {
           return [comment, ...currentComments];
         });
+        setComment('');
         setIsPosting(false);
       })
       .catch((err) => {
@@ -76,6 +77,8 @@ export default function CommentList({ article_id, articleAuthor }) {
                 label="Write a comment"
                 multiline
                 required
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
               />
               <LoadingButton
                 type="submit"
