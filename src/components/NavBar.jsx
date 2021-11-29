@@ -59,6 +59,7 @@ export default function NavBar({
                 }
               }}
             >
+              <MenuItem value={''}>All Topics</MenuItem>
               {topics.map((topic) => {
                 return (
                   <MenuItem key={topic.slug} value={topic.slug}>
