@@ -1,16 +1,16 @@
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
+import UserAccountMenu from './UserAccountMenu';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { Link } from 'react-router-dom';
 
 export default function Header() {
-  const { user, isLoggedIn, setUser } = useContext(UserContext);
+  const { isLoggedIn } = useContext(UserContext);
 
   return (
     <header>
@@ -23,20 +23,7 @@ export default function Header() {
           </Grid>
           <Grid item xs={4} sm={2}>
             {isLoggedIn ? (
-              <>
-                <Link to={`/users/${user.username}`}>
-                  <Avatar alt={user.name} src={user.avatar_url}></Avatar>
-                </Link>
-                <p>{user.username}</p>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setUser({});
-                  }}
-                >
-                  logout
-                </Button>
-              </>
+              <UserAccountMenu />
             ) : (
               <Link to="/login">
                 <Button variant="contained">Log In</Button>
