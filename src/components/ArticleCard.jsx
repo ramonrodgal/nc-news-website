@@ -9,6 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import CommentIcon from '@mui/icons-material/Comment';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
@@ -60,6 +61,11 @@ export default function ArticleCard({ article }) {
           </Grid>
         </CardContent>
         <CardActions>
+          <div>
+            <p>
+              <CommentIcon /> {article.comment_count}
+            </p>
+          </div>
           <Link to={`/articles/${article.topic}/${article.article_id}`}>
             <Button size="small" variant="contained">
               Read More

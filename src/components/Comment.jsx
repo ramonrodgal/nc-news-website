@@ -93,7 +93,9 @@ export default function Comment({ comment, articleAuthor }) {
             <Grid item xs={11}>
               <Link to={`/users/${author.username}`}>
                 <Avatar alt={author.name} src={author.avatar_url} />
-                <h3>{author.username}</h3>
+              </Link>
+              <Link to={`/users/${author.username}`}>
+                <h3>Posted by: {author.username}</h3>
               </Link>
             </Grid>
             {user.username === articleAuthor ||
@@ -112,7 +114,7 @@ export default function Comment({ comment, articleAuthor }) {
             ) : null}
             <Grid item xs={12}>
               <p>
-                Created at: - created at{' '}
+                Created at:
                 {new Date(comment.created_at).toDateString()}
               </p>
             </Grid>
