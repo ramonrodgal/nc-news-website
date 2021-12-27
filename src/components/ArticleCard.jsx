@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getUserByUsername } from "../utils/api";
+import { getUserByUsername, updateArticleVotes } from "../utils/api";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -30,8 +30,6 @@ export default function ArticleCard({ article }) {
         console.log(err);
       });
   }, [article.author]);
-
-  console.log(votes);
 
   if (isLoading)
     return (
@@ -65,7 +63,12 @@ export default function ArticleCard({ article }) {
           </Grid>
         </CardContent>
         <CardActions>
-          <Voter votes={votes} setVotes={setVotes} />
+          <Voter
+            id={article.article_id}
+            votes={votes}
+            setVotes={setVotes}
+            updateVotes={updateArticleVotes}
+          />
           <div>
             <p>
               <CommentIcon /> {article.comment_count}
