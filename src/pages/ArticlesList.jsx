@@ -62,7 +62,7 @@ export default function ArticlesList({ author }) {
           {articles.map((article) => {
             return (
               <Grid key={article.article_id} item xs={12} md={6}>
-                <ArticleCard article={{ ...article }} />
+                <ArticleCard article={{ ...article, setTopic }} />
               </Grid>
             );
           })}
