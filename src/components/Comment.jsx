@@ -1,29 +1,30 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from "react";
 import {
   getUserByUsername,
   deleteComment,
   updateCommentVotes,
-} from '../utils/api';
+} from "../utils/api";
 
-import { UserContext } from '../contexts/UserContext';
+import { UserContext } from "../contexts/UserContext";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import CircularProgress from '@mui/material/CircularProgress';
-import Avatar from '@mui/material/Avatar';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Button from '@mui/material/Button';
-import Box from '@mui/system/Box';
-import Grid from '@mui/material/Grid';
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
+import Box from "@mui/system/Box";
+import Grid from "@mui/material/Grid";
 
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 export default function Comment({ comment, articleAuthor }) {
   const { user, isLoggedIn } = useContext(UserContext);
@@ -94,9 +95,10 @@ export default function Comment({ comment, articleAuthor }) {
               <Link to={`/users/${author.username}`}>
                 <Avatar alt={author.name} src={author.avatar_url} />
               </Link>
-              <Link to={`/users/${author.username}`}>
-                <h3>Posted by: {author.username}</h3>
-              </Link>
+              <Typography variant="p">
+                Posted by:{" "}
+                <Link to={`/users/${author.username}`}>{author.username}</Link>
+              </Typography>
             </Grid>
             {user.username === articleAuthor ||
             user.username === comment.author ? (
@@ -131,7 +133,7 @@ export default function Comment({ comment, articleAuthor }) {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{'Remove comment?'}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{"Remove comment?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Are you sure you want to remove this comment? This action cannot
