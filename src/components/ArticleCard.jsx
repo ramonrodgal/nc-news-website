@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 import { getUserByUsername, updateArticleVotes } from "../utils/api";
 
 import Box from "@mui/material/Box";
-
 import CircularProgress from "@mui/material/CircularProgress";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -16,6 +16,8 @@ import Typography from "@mui/material/Typography";
 import Voter from "./Voter";
 
 export default function ArticleCard({ article, setTopic }) {
+  const { isLoggedIn } = useContext(UserContext);
+
   const [author, setAuthor] = useState({});
   const [votes, setVotes] = useState(article.votes);
   const [isLoading, setIsLoading] = useState(true);
@@ -64,12 +66,14 @@ export default function ArticleCard({ article, setTopic }) {
           <p>{article.body.slice(0, 200)}...</p>
         </CardContent>
         <CardActions>
-          <Voter
-            id={article.article_id}
-            votes={votes}
-            setVotes={setVotes}
-            updateVotes={updateArticleVotes}
-          />
+          {isLoggedIn === true ? (
+            <Voter
+              id={article.article_id}
+              votes={votes}
+              setVotes={setVotes}
+              updateVotes={updateArticleVotes}
+            />
+          ) : null}
           <div>
             <p>
               <CommentIcon /> {article.comment_count}
