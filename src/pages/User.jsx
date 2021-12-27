@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import ArticlesList from './ArticlesList';
-import NotFound from './NotFound';
+import ArticlesList from "./ArticlesList";
+import NotFound from "../components/NotFound";
 
-import { getUserByUsername } from '../utils/api';
+import { getUserByUsername } from "../utils/api";
 
-import CircularProgress from '@mui/material/CircularProgress';
-import Avatar from '@mui/material/Avatar';
+import CircularProgress from "@mui/material/CircularProgress";
+import Avatar from "@mui/material/Avatar";
 
 export default function User() {
   const { username } = useParams();

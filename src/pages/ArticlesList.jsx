@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
-import NavBar from './NavBar';
-import NotFound from './NotFound';
-import ArticleCard from './ArticleCard';
-import { getArticles } from '../utils/api';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import NavBar from "../components/NavBar";
+import NotFound from "../components/NotFound";
+import ArticleCard from "../components/ArticleCard";
+import { getArticles } from "../utils/api";
+import { useParams } from "react-router-dom";
 
-import CircularProgress from '@mui/material/CircularProgress';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import CircularProgress from "@mui/material/CircularProgress";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 export default function ArticlesList({ author }) {
   const [articles, setArticles] = useState([]);

@@ -1,21 +1,21 @@
-import { useEffect, useState, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useEffect, useState, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
 import {
   getArticleById,
   updateArticleVotes,
   getUserByUsername,
-} from '../utils/api';
-import CommentList from './CommentList';
-import NotFound from './NotFound';
-import { UserContext } from '../contexts/UserContext';
+} from "../utils/api";
+import CommentList from "../components/CommentList";
+import NotFound from "../components/NotFound";
+import { UserContext } from "../contexts/UserContext";
 
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/system/Box';
-import Grid from '@mui/material/Grid';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/system/Box";
+import Grid from "@mui/material/Grid";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 export default function Article() {
   const { article_id } = useParams();
@@ -102,7 +102,7 @@ export default function Article() {
                   <Avatar alt={author.name} src={author.avatar_url} />
                 </Link>
                 <p>
-                  <Link to={`/users/${article.author}`}>{article.author}</Link>{' '}
+                  <Link to={`/users/${article.author}`}>{article.author}</Link>{" "}
                   - created at {new Date(article.created_at).toDateString()}
                 </p>
               </Grid>

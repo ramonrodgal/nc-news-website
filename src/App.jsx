@@ -1,14 +1,14 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
-import Header from './components/Header';
-import ArticlesList from './components/ArticlesList';
-import Article from './components/Article';
-import CreateArticle from './components/CreateArticle';
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
-import User from './components/User';
-import Footer from './components/Footer';
-import NotFound from './components/NotFound';
+import Header from "./components/Header";
+import ArticlesList from "./pages/ArticlesList";
+import Article from "./pages/Article";
+import CreateArticle from "./pages/CreateArticle";
+import LogIn from "./pages/LogIn";
+import SignUp from "./pages/SignUp";
+import User from "./pages/User";
+import Footer from "./components/Footer";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
