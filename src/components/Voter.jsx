@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Typography from "@mui/material/Typography";
@@ -28,13 +28,13 @@ export default function Voter({ id, votes, setVotes, updateVotes }) {
 
   return (
     <div>
-      <IconButton onClick={handleUpVote} disabled={disableUpVote}>
+      <Button onClick={handleUpVote} disabled={disableUpVote}>
         <ArrowUpwardIcon />
-      </IconButton>
+      </Button>
       <Typography variant="p">{votes}</Typography>
-      <IconButton onClick={handleDownVote} disabled={disableDownVote}>
+      <Button onClick={handleDownVote} disabled={disableDownVote}>
         <ArrowDownwardIcon />
-      </IconButton>
+      </Button>
     </div>
   );
 }
