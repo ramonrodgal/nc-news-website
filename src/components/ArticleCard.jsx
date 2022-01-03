@@ -10,7 +10,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CommentIcon from "@mui/icons-material/Comment";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import Voter from "./Voter";
@@ -44,28 +43,45 @@ export default function ArticleCard({ article, setTopic }) {
     <Box sx={{ flexGrow: 1 }}>
       <Card>
         <CardContent>
-          <Typography variant="p">
-            <Link
-              to={`/articles/${article.topic}`}
-              onClick={() => setTopic(article.topic)}
-            >
-              {article.topic}
-            </Link>
-          </Typography>
           <Link to={`/articles/${article.topic}/${article.article_id}`}>
             <Typography variant="h2">{article.title}</Typography>
           </Link>
-          <Link to={`/users/${article.author}`}>
-            <Avatar alt={author.name} src={author.avatar_url} />
-          </Link>
-          <p>
-            <Link to={`/users/${article.author}`}>{article.author}</Link> -{" "}
-            {new Date(article.created_at).toDateString()}
-          </p>
-
-          <p>{article.body.slice(0, 200)}...</p>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Link to={`/users/${article.author}`}>
+              <Avatar sx={{ m: 1 }} alt={author.name} src={author.avatar_url} />
+            </Link>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                direction: "row",
+              }}
+            >
+              <Link to={`/users/${article.author}`}>
+                <Typography variant="subtitle1" sx={{ m: 1 }}>
+                  {article.author}
+                </Typography>
+              </Link>
+              <Typography variant="subtitle1" sx={{ m: 1 }}>
+                {new Date(article.created_at).toDateString()}
+              </Typography>
+            </Box>
+          </Box>
+          <Typography variant="body">{article.body}</Typography>
         </CardContent>
-        <CardActions>
+        <CardActions
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
           {isLoggedIn === true ? (
             <Voter
               id={article.article_id}
@@ -74,16 +90,9 @@ export default function ArticleCard({ article, setTopic }) {
               updateVotes={updateArticleVotes}
             />
           ) : null}
-          <div>
-            <p>
-              <CommentIcon /> {article.comment_count}
-            </p>
-          </div>
-          <Link to={`/articles/${article.topic}/${article.article_id}`}>
-            <Button size="small" variant="contained">
-              Read More
-            </Button>
-          </Link>
+          <Box>
+            <CommentIcon /> {article.comment_count}
+          </Box>
         </CardActions>
       </Card>
     </Box>
