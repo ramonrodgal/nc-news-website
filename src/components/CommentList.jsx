@@ -1,21 +1,22 @@
-import { useEffect, useState, useContext } from 'react';
-import { getComments, postComment } from '../utils/api';
-import Comment from './Comment';
+import { useEffect, useState, useContext } from "react";
+import { getComments, postComment } from "../utils/api";
+import Comment from "./Comment";
 
-import { UserContext } from '../contexts/UserContext';
+import { UserContext } from "../contexts/UserContext";
 
-import CircularProgress from '@mui/material/CircularProgress';
-import LoadingButton from '@mui/lab/LoadingButton';
-import SendIcon from '@mui/icons-material/Send';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import Box from '@mui/material/Box';
+import CircularProgress from "@mui/material/CircularProgress";
+import LoadingButton from "@mui/lab/LoadingButton";
+import SendIcon from "@mui/icons-material/Send";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 export default function CommentList({ article_id, articleAuthor }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [isPosting, setIsPosting] = useState(false);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function CommentList({ article_id, articleAuthor }) {
         setComments((currentComments) => {
           return [comment, ...currentComments];
         });
-        setComment('');
+        setComment("");
         setIsPosting(false);
       })
       .catch((err) => {
@@ -60,39 +61,31 @@ export default function CommentList({ article_id, articleAuthor }) {
     );
 
   return (
-    <div>
-      <h2>Comments</h2>
+    <Box sx={{ mt: 1 }}>
+      <Typography variant="h3">Comments</Typography>
       {user.username ? (
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            margin: '20px',
-          }}
-        >
-          <form onSubmit={handlePostComment}>
-            <FormControl>
-              <TextField
-                id="outlined-textarea"
-                label="Write a comment"
-                multiline
-                required
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <LoadingButton
-                type="submit"
-                endIcon={<SendIcon />}
-                loading={isPosting}
-                loadingPosition="end"
-                variant="contained"
-                sx={{ margin: '10px' }}
-              >
-                Send
-              </LoadingButton>
-            </FormControl>
-          </form>
-        </Box>
+        <form onSubmit={handlePostComment}>
+          <FormControl fullWidth>
+            <TextField
+              id="outlined-textarea"
+              label="Write a comment"
+              multiline
+              rows={4}
+              required
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <LoadingButton
+              type="submit"
+              endIcon={<SendIcon />}
+              loading={isPosting}
+              loadingPosition="end"
+              variant="contained"
+            >
+              Send
+            </LoadingButton>
+          </FormControl>
+        </form>
       ) : null}
       {comments.map((comment) => {
         return (
@@ -103,6 +96,6 @@ export default function CommentList({ article_id, articleAuthor }) {
           />
         );
       })}
-    </div>
+    </Box>
   );
 }
