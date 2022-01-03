@@ -8,6 +8,8 @@ import { getUserByUsername } from "../utils/api";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 export default function User() {
   const { username } = useParams();
@@ -24,6 +26,7 @@ export default function User() {
       })
       .catch((err) => {
         setIsloading(false);
+        console.log(err);
       });
   }, [username]);
 
@@ -43,9 +46,23 @@ export default function User() {
 
   return (
     <main>
-      <Avatar alt={user.name} src={user.avatar_url} />
-      <h2>{user.username}</h2>
-      <h2>Articles</h2>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar
+          alt={user.name}
+          src={user.avatar_url}
+          sx={{ width: 200, height: 200, mt: 2 }}
+        />
+        <Typography variant="h2" sx>
+          {user.username}
+        </Typography>
+      </Box>
+      <Typography variant="h3">Articles</Typography>
       <ArticlesList author={username} />
     </main>
   );
