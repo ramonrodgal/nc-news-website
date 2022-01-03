@@ -61,8 +61,11 @@ export default function ArticlesList({ author }) {
         <Grid container spacing={4}>
           {articles.map((article) => {
             return (
-              <Grid key={article.article_id} item xs={12} md={6}>
-                <ArticleCard article={{ ...article, setTopic }} />
+              <Grid key={article.article_id} item xs={12}>
+                <ArticleCard
+                  key={article.article_id}
+                  article={{ ...article }}
+                />
               </Grid>
             );
           })}
