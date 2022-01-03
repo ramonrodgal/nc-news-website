@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 
 import Voter from "./Voter";
 
-export default function ArticleCard({ article, setTopic }) {
+export default function ArticleCard({ article }) {
   const { isLoggedIn } = useContext(UserContext);
 
   const [author, setAuthor] = useState({});
