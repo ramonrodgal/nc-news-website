@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 //API functions
-import { getTopics } from '../utils/api';
-import { useNavigate } from 'react-router';
+import { getTopics } from "../utils/api";
+import { useNavigate } from "react-router";
 
-import CircularProgress from '@mui/material/CircularProgress';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import CircularProgress from "@mui/material/CircularProgress";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 export default function NavBar({
   setTopic,
   author,
-  topic = '',
-  sortBy = '',
+  topic = "",
+  sortBy = "",
   setSortBy,
 }) {
   const [topics, setTopics] = useState({});
@@ -43,10 +43,10 @@ export default function NavBar({
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, m: 2 }}>
       <Grid container spacing={2}>
         <Grid item xs={6} md={2}>
-          <FormControl fullWidth>
+          <FormControl fullWidth variant="filled">
             <InputLabel id="select-topic">Topic</InputLabel>
             <Select
               labelId="select-topic"
@@ -59,7 +59,7 @@ export default function NavBar({
                 }
               }}
             >
-              <MenuItem value={''}>All Topics</MenuItem>
+              <MenuItem value={""}>All Topics</MenuItem>
               {topics.map((topic) => {
                 return (
                   <MenuItem key={topic.slug} value={topic.slug}>
@@ -71,7 +71,7 @@ export default function NavBar({
           </FormControl>
         </Grid>
         <Grid item xs={6} md={2}>
-          <FormControl fullWidth>
+          <FormControl fullWidth variant="filled">
             <InputLabel>Sort by</InputLabel>
             <Select
               label="Sort by"
