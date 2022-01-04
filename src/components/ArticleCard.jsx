@@ -41,6 +41,11 @@ export default function ArticleCard({ article }) {
           <Link to={`/articles/${article.topic}/${article.article_id}`}>
             <Typography variant="h2">{article.title}</Typography>
           </Link>
+          <Box>
+            <Typography variant="subtitle1">
+              {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+            </Typography>
+          </Box>
           <Box
             sx={{
               display: "flex",
