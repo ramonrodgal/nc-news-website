@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
@@ -9,8 +11,27 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 
+import Modal from "@mui/material/Modal";
+import LogIn from "./LogIn";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function Header() {
   const { isLoggedIn } = useContext(UserContext);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <header>
@@ -35,13 +56,19 @@ export default function Header() {
             {isLoggedIn ? (
               <UserAccountMenu />
             ) : (
-              <Link to="/login">
-                <Button variant="contained">Login</Button>
-              </Link>
+              <Button variant="contained" onClick={handleOpen}>
+                Login
+              </Button>
             )}
           </Grid>
         </Grid>
       </Box>
+
+      <Modal open={open} onClose={handleClose}>
+        <Box sx={style}>
+          <LogIn setOpen={setOpen} />
+        </Box>
+      </Modal>
     </header>
   );
 }
