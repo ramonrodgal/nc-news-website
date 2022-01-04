@@ -35,7 +35,7 @@ export default function User() {
   if (isError) return <NotFound />;
 
   return (
-    <main>
+    <>
       <Box
         sx={{
           display: "flex",
@@ -54,6 +54,6 @@ export default function User() {
       </Box>
       <Typography variant="h3">Articles</Typography>
       <ArticlesList author={username} />
-    </main>
+    </>
   );
 }
