@@ -43,6 +43,7 @@ export default function ArticlesList({ author }) {
               sortBy={sortBy}
               setSortBy={setSortBy}
               setTopic={setTopic}
+              setArticles={setArticles}
             />
           </Grid>
         </Grid>
