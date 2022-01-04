@@ -32,12 +32,7 @@ export default function User() {
 
   if (isLoading) return <Loading />;
 
-  if (isError)
-    return (
-      <main>
-        <NotFound />
-      </main>
-    );
+  if (isError) return <NotFound />;
 
   return (
     <main>

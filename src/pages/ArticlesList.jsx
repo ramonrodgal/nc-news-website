@@ -28,17 +28,9 @@ export default function ArticlesList({ author }) {
       });
   }, [topic, sortBy, author]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  if (isLoading) return <Loading />;
 
-  if (isError) {
-    return (
-      <main>
-        <NotFound />
-      </main>
-    );
-  }
+  if (isError) return <NotFound />;
 
   return (
     <main>
