@@ -5,6 +5,8 @@ import {
   updateCommentVotes,
 } from "../utils/api";
 
+import Voter from "./Voter";
+
 import { UserContext } from "../contexts/UserContext";
 
 import { Link } from "react-router-dom";
@@ -15,16 +17,16 @@ import Avatar from "@mui/material/Avatar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import Box from "@mui/system/Box";
-import Grid from "@mui/material/Grid";
+
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 export default function Comment({ comment, articleAuthor }) {
   const { user, isLoggedIn } = useContext(UserContext);
@@ -58,10 +60,6 @@ export default function Comment({ comment, articleAuthor }) {
         console.log(err);
       });
   };
-  const handleVote = (vote) => {
-    setVotes((prevVotes) => prevVotes + vote);
-    updateCommentVotes(comment.comment_id, vote).then((comment) => {});
-  };
 
   if (isLoading)
     return (
@@ -73,81 +71,87 @@ export default function Comment({ comment, articleAuthor }) {
   if (isDeleted) return null;
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <hr></hr>
-      <Grid container>
-        <Grid item xs={2}>
-          {isLoggedIn === true ? (
-            <Button onClick={() => handleVote(1)}>
-              <ArrowUpwardIcon />
-            </Button>
-          ) : null}
-          <p>Votes:{votes}</p>
-          {isLoggedIn === true ? (
-            <Button onClick={() => handleVote(-1)}>
-              <ArrowDownwardIcon />
-            </Button>
-          ) : null}
-        </Grid>
-        <Grid item xs={10}>
-          <Grid container>
-            <Grid item xs={11}>
-              <Link to={`/users/${author.username}`}>
-                <Avatar alt={author.name} src={author.avatar_url} />
-              </Link>
-              <Typography variant="p">
-                Posted by:{" "}
-                <Link to={`/users/${author.username}`}>{author.username}</Link>
-              </Typography>
-            </Grid>
-            {user.username === articleAuthor ||
-            user.username === comment.author ? (
-              <Grid item xs={1}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                >
-                  <DeleteIcon />
-                </Button>
-              </Grid>
-            ) : null}
-            <Grid item xs={12}>
-              <p>
-                Created at:
-                {new Date(comment.created_at).toDateString()}
-              </p>
-            </Grid>
-            <Grid item xs={12}>
-              <p>{comment.body}</p>
-            </Grid>
-          </Grid>
-        </Grid>
-
-        {/* Alert Dialog */}
-        <Dialog
-          open={open}
-          onClose={() => setOpen(false)}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+    <Card sx={{ mb: 2 }}>
+      <CardContent>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+          }}
         >
-          <DialogTitle id="alert-dialog-title">{"Remove comment?"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Are you sure you want to remove this comment? This action cannot
-              be undone.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOpen(false)}>Cancel</Button>
-            <Button onClick={handleDelete} autoFocus>
-              Delete
+          <Link to={`/users/${author.username}`}>
+            <Avatar sx={{ m: 1 }} alt={author.name} src={author.avatar_url} />
+          </Link>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              direction: "row",
+            }}
+          >
+            <Link to={`/users/${author.username}`}>
+              <Typography variant="subtitle1" sx={{ m: 1 }}>
+                {author.username}
+              </Typography>
+            </Link>
+            <Typography variant="subtitle1" sx={{ m: 1 }}>
+              {new Date(comment.created_at).toDateString()}
+            </Typography>
+          </Box>
+        </Box>
+        <Typography variant="body">{comment.body}</Typography>
+      </CardContent>
+      <CardActions
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        {isLoggedIn === true ? (
+          <Voter
+            id={comment.comment_id}
+            votes={votes}
+            setVotes={setVotes}
+            updateVotes={updateCommentVotes}
+          />
+        ) : null}
+        {user.username === articleAuthor || user.username === comment.author ? (
+          <Box>
+            <Button
+              color="secondary"
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
+              <DeleteIcon />
             </Button>
-          </DialogActions>
-        </Dialog>
-      </Grid>
-    </Box>
+          </Box>
+        ) : null}
+      </CardActions>
+
+      {/* Alert Dialog */}
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Remove comment?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to remove this comment? This action cannot be
+            undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button onClick={handleDelete} autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Card>
   );
 }
