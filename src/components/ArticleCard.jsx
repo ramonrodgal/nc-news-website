@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { getUserByUsername, updateArticleVotes } from "../utils/api";
 
 import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -12,6 +11,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
+import Loading from "./Loading";
 import Voter from "./Voter";
 
 export default function ArticleCard({ article }) {
@@ -32,12 +32,7 @@ export default function ArticleCard({ article }) {
       });
   }, [article.author]);
 
-  if (isLoading)
-    return (
-      <div>
-        <CircularProgress />
-      </div>
-    );
+  if (isLoading) return <Loading />;
 
   return (
     <Box sx={{ flexGrow: 1 }}>

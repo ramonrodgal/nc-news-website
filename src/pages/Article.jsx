@@ -4,8 +4,7 @@ import { getArticleById } from "../utils/api";
 import ArticleCard from "../components/ArticleCard";
 import CommentList from "../components/CommentList";
 import NotFound from "../components/NotFound";
-
-import CircularProgress from "@mui/material/CircularProgress";
+import Loading from "../components/Loading";
 import Box from "@mui/system/Box";
 
 export default function Article() {
@@ -28,12 +27,7 @@ export default function Article() {
       });
   }, [article_id]);
 
-  if (isLoading)
-    return (
-      <main>
-        <CircularProgress />
-      </main>
-    );
+  if (isLoading) return <Loading />;
 
   if (isError)
     return (

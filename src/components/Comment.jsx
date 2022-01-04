@@ -6,12 +6,12 @@ import {
 } from "../utils/api";
 
 import Voter from "./Voter";
+import Loading from "./Loading";
 
 import { UserContext } from "../contexts/UserContext";
 
 import { Link } from "react-router-dom";
 
-import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -61,12 +61,7 @@ export default function Comment({ comment, articleAuthor }) {
       });
   };
 
-  if (isLoading)
-    return (
-      <div>
-        <CircularProgress />
-      </div>
-    );
+  if (isLoading) return <Loading />;
 
   if (isDeleted) return null;
 

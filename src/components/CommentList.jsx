@@ -1,10 +1,11 @@
 import { useEffect, useState, useContext } from "react";
 import { getComments, postComment } from "../utils/api";
+
 import Comment from "./Comment";
+import Loading from "../components/Loading";
 
 import { UserContext } from "../contexts/UserContext";
 
-import CircularProgress from "@mui/material/CircularProgress";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
@@ -53,12 +54,7 @@ export default function CommentList({ article_id, articleAuthor }) {
       });
   };
 
-  if (isLoading)
-    return (
-      <div>
-        <CircularProgress />
-      </div>
-    );
+  if (isLoading) return <Loading />;
 
   return (
     <Box sx={{ mt: 1 }}>

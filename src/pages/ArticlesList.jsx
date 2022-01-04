@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import NotFound from "../components/NotFound";
 import ArticleCard from "../components/ArticleCard";
+import Loading from "../components/Loading";
 import { getArticles } from "../utils/api";
 import { useParams } from "react-router-dom";
 
-import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
@@ -29,11 +29,7 @@ export default function ArticlesList({ author }) {
   }, [topic, sortBy, author]);
 
   if (isLoading) {
-    return (
-      <main>
-        <CircularProgress />
-      </main>
-    );
+    return <Loading />;
   }
 
   if (isError) {

@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 
 import ArticlesList from "./ArticlesList";
 import NotFound from "../components/NotFound";
+import Loading from "../components/Loading";
 
 import { getUserByUsername } from "../utils/api";
 
-import CircularProgress from "@mui/material/CircularProgress";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -30,12 +30,7 @@ export default function User() {
       });
   }, [username]);
 
-  if (isLoading)
-    return (
-      <main>
-        <CircularProgress />
-      </main>
-    );
+  if (isLoading) return <Loading />;
 
   if (isError)
     return (

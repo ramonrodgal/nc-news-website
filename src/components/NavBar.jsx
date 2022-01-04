@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-//API functions
+
 import { getTopics } from "../utils/api";
 import { useNavigate } from "react-router";
 
-import CircularProgress from "@mui/material/CircularProgress";
+import Loading from "./Loading";
+
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -35,11 +36,7 @@ export default function NavBar({
   }, []);
 
   if (isLoading) {
-    return (
-      <div>
-        <CircularProgress />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
